@@ -12,15 +12,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
+Route::get('/', function(){
     return view('home');
-})->name('home');
+});
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/samples', 'App\Http\Controllers\SampleController@index')->name('samples');
 
-Route::get('/samples', function () {
-    return view('samples');
-})->name('samples');
+Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('about');
+
