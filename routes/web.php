@@ -21,3 +21,4 @@ Route::get('/samples', 'App\Http\Controllers\SampleController@index')->name('sam
 
 Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('about');
 
+
