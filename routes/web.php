@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SampleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ Route::get('/', function(){
 });
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::get('/samples', 'App\Http\Controllers\SampleController@index')->name('samples');
+Route::resource('samples', App\Http\Controllers\SampleController::class);
 
 Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('about');
 
