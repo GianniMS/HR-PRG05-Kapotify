@@ -16,7 +16,7 @@ class SampleController extends Controller
     public function index()
     {
         $data = Sample::all();
-        return view('samples/samples', ['data'=>$data]);
+        return view('samples/samples', ['data' => $data]);
     }
 
     public function create()
@@ -26,16 +26,15 @@ class SampleController extends Controller
 
     public function store(Request $request)
     {
-        $request -> validate([
+        $request->validate([
             'name' => 'required',
             'audio_file' => 'required',
             'description' => 'required',
             'cover' => 'required',
         ]);
-//        $userId = $request->input('user_id'); ASK ABOUT THIS
 
-            $sample = new Sample();
-//                'user_id' => $userId,
+        $sample = new Sample();
+        $sample->user_id = Auth::id();
         $sample->name = $request->input('name');
         $sample->audio_file = $request->input('name');
         $sample->description = $request->input('name');
@@ -48,17 +47,17 @@ class SampleController extends Controller
 
     public function show(Sample $sample)
     {
-       return view('samples/show_sample', ['data'=>$sample]);
+        return view('samples/show_sample', ['data' => $sample]);
     }
 
     public function edit(Sample $sample)
     {
-        return view('samples/edit_sample', ['data'=>$sample]);
+        return view('samples/edit_sample', ['data' => $sample]);
     }
 
     public function update(Request $request, Sample $sample)
     {
-        $request -> validate([
+        $request->validate([
             'name' => 'required',
             'audio_file' => 'required',
             'description' => 'required',

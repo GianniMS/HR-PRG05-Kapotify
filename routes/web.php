@@ -22,8 +22,6 @@ Route::resource('samples', App\Http\Controllers\SampleController::class);
 
 Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('about');
 
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

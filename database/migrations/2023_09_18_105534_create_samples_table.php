@@ -14,17 +14,11 @@ return new class extends Migration
         Schema::create('samples', function (Blueprint $table) {
             $table->id();
 
-//            $table->foreignId('user_id')->constrained(); ask about nullable
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->string('name', 50);
             $table->string('audio_file', 255);
             $table->text('description');
             $table->string('cover', 255);
-
-            // Define the foreign key constraint
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
 
             $table->timestamps();
         });

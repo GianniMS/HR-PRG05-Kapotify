@@ -10,6 +10,7 @@ class Sample extends Model
     use HasFactory;
 
     protected $fillable = [
+      'user_id',
       'name',
       'audio_file',
       'description',

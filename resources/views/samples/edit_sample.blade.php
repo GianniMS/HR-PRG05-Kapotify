@@ -11,7 +11,6 @@
                 <form action="{{ route('samples.update', $data->id)}}" method="post">
                     @csrf
                     @method('PUT')
-{{--                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}
                     <div class="mb-3 mt-3">
                         <label for="name" class="form-label">Name:</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter name"

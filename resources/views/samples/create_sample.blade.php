@@ -10,7 +10,6 @@
             <div class="col-md-6">
                 <form action="{{ route('samples.store')}}" method="post">
                     @csrf
-                    {{--                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}
                     <div class="mb-3 mt-3">
                         <label for="name" class="form-label">Name:</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
