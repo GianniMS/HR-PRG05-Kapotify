@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class SampleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index()
     {
         $data = Sample::all();
@@ -21,15 +26,23 @@ class SampleController extends Controller
 
     public function store(Request $request)
     {
+        $request -> validate([
+            'name' => 'required',
+            'audio_file' => 'required',
+            'description' => 'required',
+            'cover' => 'required',
+        ]);
 //        $userId = $request->input('user_id'); ASK ABOUT THIS
 
-            Sample::create([
+            $sample = new Sample();
 //                'user_id' => $userId,
-                'name' => $request->input('name'),
-                'audio_file' => $request->input('audio_file'),
-                'description' => $request->input('description'),
-                'cover' => $request->input('cover'),
-            ]);
+        $sample->name = $request->input('name');
+        $sample->audio_file = $request->input('name');
+        $sample->description = $request->input('name');
+        $sample->cover = $request->input('name');
+
+        $sample->save();
+
         return redirect('samples')->withSuccess('Upload successful!');
     }
 
@@ -45,6 +58,13 @@ class SampleController extends Controller
 
     public function update(Request $request, Sample $sample)
     {
+        $request -> validate([
+            'name' => 'required',
+            'audio_file' => 'required',
+            'description' => 'required',
+            'cover' => 'required',
+        ]);
+
         $sample->update($request->all());
         return redirect('samples')->withSuccess('Update successful!');
     }
