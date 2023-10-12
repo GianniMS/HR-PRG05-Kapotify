@@ -36,9 +36,17 @@ class SampleController extends Controller
         $sample = new Sample();
         $sample->user_id = Auth::id();
         $sample->name = $request->input('name');
-        $sample->audio_file = $request->input('name');
-        $sample->description = $request->input('name');
-        $sample->cover = $request->input('name');
+        $sample->audio_file = $request->input('audio_file');
+        $sample->description = $request->input('description');
+
+        if ($request->hasFile('cover')) {
+            $destination_path = 'public/samples/covers';
+            $cover = $request->file('cover');
+            $cover_name = $cover->getClientOriginalName();
+            $path = $request->file('cover')->storeAs($destination_path, $cover_name);
+
+            $sample['cover'] = $cover_name;
+        }
 
         $sample->save();
 
@@ -61,10 +69,11 @@ class SampleController extends Controller
             'name' => 'required',
             'audio_file' => 'required',
             'description' => 'required',
-            'cover' => 'required',
+//            'cover' => 'required',
         ]);
 
         $sample->update($request->all());
+
         return redirect('samples')->withSuccess('Update successful!');
     }
 

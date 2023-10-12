@@ -10,7 +10,7 @@
         <p><b>Name: </b> {{ $data->name }}</p>
         <p><b>Audio_file: </b> {{ $data->audio_file }}</p>
         <p><b>Description: </b> {{ $data->description }}</p>
-        <p><b>Cover: </b> {{ $data->cover }}</p>
+        <p><b>Cover: </b> <img height="100px" width="100px" src="{{ asset('/storage/samples/covers/'.$data->cover) }}"/></p>
     </div>
 </div>
 @endsection
