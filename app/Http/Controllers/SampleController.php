@@ -28,9 +28,11 @@ class SampleController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'audio_file' => 'required',
+            'audio_file' => ['required',
+//                'mimes:mp3,wav'
+            ],
             'description' => 'required',
-            'cover' => 'required',
+            'cover' => ['required', 'mimes:jpg,jpeg,png'],
         ]);
 
         $sample = new Sample();
@@ -38,6 +40,15 @@ class SampleController extends Controller
         $sample->name = $request->input('name');
         $sample->audio_file = $request->input('audio_file');
         $sample->description = $request->input('description');
+
+        if ($request->hasFile('audio_file')) {
+            $destination_path = 'public/samples/audio_files';
+            $audio = $request->file('audio_file');
+            $audio_name = $audio->getClientOriginalName();
+            $path = $request->file('audio_file')->storeAs($destination_path, $audio_name);
+
+            $sample['audio_file'] = $audio_name;
+        }
 
         if ($request->hasFile('cover')) {
             $destination_path = 'public/samples/covers';
@@ -67,10 +78,13 @@ class SampleController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'audio_file' => 'required',
+            'audio_file' => ['required',
+//                'mimes:mp3,wav'
+            ],
             'description' => 'required',
-//            'cover' => 'required',
+//            'cover' => ['required', 'mimes:jpg,jpeg,png'],
         ]);
+
 
         $sample->update($request->all());
 

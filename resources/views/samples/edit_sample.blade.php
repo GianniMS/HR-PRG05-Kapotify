@@ -51,13 +51,13 @@
                             <img height="100px" width="100px"
                                  src="{{ asset('/storage/samples/covers/'.$data->cover) }}"/>
                         </label>
-{{--                        <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover"--}}
-{{--                               name="cover">--}}
-{{--                        @error('cover')--}}
-{{--                        <div class="invalid-feedback">--}}
-{{--                            {{ $message }}--}}
-{{--                        </div>--}}
-{{--                        @enderror--}}
+                        <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover"
+                               name="cover">
+                        @error('cover')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
