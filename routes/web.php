@@ -25,3 +25,4 @@ Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('abou
 Auth::routes();
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+//Route::resource('profile', App\Http\Controllers\SampleController::class);

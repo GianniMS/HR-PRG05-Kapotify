@@ -11,4 +11,6 @@ class ProfileController extends Controller
         return view('profile/profile');
     }
 
+
+
 }
