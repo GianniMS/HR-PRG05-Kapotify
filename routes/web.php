@@ -25,4 +25,9 @@ Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('abou
 Auth::routes();
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
-//Route::resource('profile', App\Http\Controllers\SampleController::class);
+
+//Admin Routes
+Route::get('/post-manager', [App\Http\Controllers\PostManagerController::class, 'index'])->name('post-manager');
+
+Route::get('/user-list', [App\Http\Controllers\UserListController::class, 'index'])->name('user-list');
+

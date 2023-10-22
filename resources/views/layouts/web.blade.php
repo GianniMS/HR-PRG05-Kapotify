@@ -26,11 +26,24 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
-
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('samples.index') }}">Samples</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('about') }}">About</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('post-manager') }}">Post manager</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('user-list') }}">User list</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
