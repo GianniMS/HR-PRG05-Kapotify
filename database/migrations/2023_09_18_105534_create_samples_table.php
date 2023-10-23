@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('audio_file', 255);
             $table->text('description');
             $table->string('cover', 255);
+            $table->boolean('active')->default(true);
 
             $table->timestamps();
         });

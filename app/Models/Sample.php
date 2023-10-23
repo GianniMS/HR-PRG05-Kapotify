@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sample extends Model
 {
+    public $timestamps = false;
+
     use HasFactory;
 
     protected $fillable = [
@@ -16,4 +18,11 @@ class Sample extends Model
       'description',
       'cover',
     ];
+
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class, 'genre_sample', 'sample_id', 'genre_id')
+            ->withTimestamps(); // If you want to track timestamps
+    }
 }
