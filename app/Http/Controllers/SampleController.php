@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SampleController extends Controller
 {
@@ -78,15 +79,28 @@ class SampleController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'audio_file' => ['required',
-//                'mimes:mp3,wav'
-            ],
+            'audio_file' => ['required'],
             'description' => 'required',
-//            'cover' => ['required', 'mimes:jpg,jpeg,png'],
+            'cover' => ['required', 'image', 'mimes:jpg,jpeg,png'],
         ]);
 
+        if ($request->hasFile('cover')) {
+            // Delete old image
 
-        $sample->update($request->all());
+            // Upload new image to storage
+            $destination_path = 'public/samples/covers';
+            $cover = $request->file('cover');
+            $cover_name = $cover->getClientOriginalName();
+            $path = $request->file('cover')->storeAs($destination_path, $cover_name);
+
+            $sample->cover = $cover_name;
+        }
+
+        $sample->name = $request->input('name');
+        $sample->audio_file = $request->input('audio_file');
+        $sample->description = $request->input('description');
+
+        $sample->save();
 
         return redirect('samples')->withSuccess('Update successful!');
     }
