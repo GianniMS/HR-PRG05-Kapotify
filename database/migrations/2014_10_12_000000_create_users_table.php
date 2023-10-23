@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->tinyInteger('role')->default(1);
+            $table->integer('login_count')->default(0); // Add login_count field
             $table->timestamps();
         });
     }

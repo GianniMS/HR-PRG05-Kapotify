@@ -15,6 +15,7 @@
             <tr>
                 <th>ID</th>
                 <th>Username</th>
+                <th>Login count</th>
                 <th>Role</th>
             </tr>
             @foreach ($users as $user)
@@ -22,6 +23,7 @@
                 <tr>
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
+                    <td>{{ $user->login_count }}</td> <!-- Display the login count -->
                     <td>
                         @if ($user->role === 1)
                             User

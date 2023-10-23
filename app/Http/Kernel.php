@@ -47,6 +47,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'role' => \App\Http\Middleware\AdminMiddleware::class,
+        'check_login_count' => \App\Http\Middleware\CheckLoginCount::class,
     ];
 
     /**

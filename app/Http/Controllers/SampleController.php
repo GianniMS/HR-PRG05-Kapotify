@@ -22,7 +22,10 @@ class SampleController extends Controller
 
     public function create()
     {
-        return view('samples/create_sample');
+        $user = Auth::user(); // Get the currently authenticated user
+        $loginCount = $user->login_count; // Assuming 'login_count' is the name of the field
+
+        return view('samples/create_sample', compact('loginCount'));
     }
 
     public function store(Request $request)
@@ -122,5 +125,6 @@ class SampleController extends Controller
 
         return redirect()->back()->with('success', 'Sample status toggled successfully.');
     }
+
 
 }

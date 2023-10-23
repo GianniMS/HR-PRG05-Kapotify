@@ -5,8 +5,16 @@
 @section ('content')
     <div class="container">
         <h1>Samples</h1>
-        <a href="{{ route('samples.create')}}" class="btn btn-info float-end">Upload Sample</a>
-
+        @if(Auth::check() && Auth::user()->login_count >= 3)
+            {{-- User is logged in and has at least 3 logins --}}
+            <a href="{{ route('samples.create')}}" class="btn btn-info float-end">Upload Sample</a>
+            {{-- Place your content for authorized users here --}}
+        @else
+            {{-- User does not meet the login count requirement --}}
+            <a href="{{ route('samples.create')}}" class="btn btn-danger float-end">Upload Sample</a>
+            {{-- Optionally, you can display a message or take other actions for unauthorized users here --}}
+        @endif
+{{--        <a href="{{ route('samples.create')}}" class="btn btn-info float-end">Upload Sample</a>--}}
         <div class="container mt-3">
             <p>All the samples uploaded by the users of this site</p>
 

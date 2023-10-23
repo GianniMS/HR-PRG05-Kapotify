@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckLoginCount;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SampleController;
 
@@ -13,24 +14,27 @@ use App\Http\Controllers\SampleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-
-Route::resource('samples', App\Http\Controllers\SampleController::class);
-
-Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('about');
-
+// Authentication routes
 Auth::routes();
 
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+// Home and About routes
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/about', 'AboutUsController@index')->name('about');
 
+// Profile route
+Route::get('/profile', 'ProfileController@index')->name('profile');
+
+// Sample routes
+Route::resource('samples', 'SampleController');
+
+
+// Admin routes (if applicable)
 Route::middleware(['role:2'])->group(function () {
-    Route::get('/user-list', [App\Http\Controllers\UserListController::class, 'index'])->name('user-list');
-    Route::post('/change-role/{user}', 'App\Http\Controllers\UserListController@changeRole')->name('change-role');
+    // User list and role change
+    Route::get('/user-list', 'UserListController@index')->name('user-list');
+    Route::post('/change-role/{user}', 'UserListController@changeRole')->name('change-role');
 
-    Route::get('/post-manager', [App\Http\Controllers\PostManagerController::class, 'index'])->name('post-manager');
-    Route::post('/toggle-sample/{sample}', 'App\Http\Controllers\SampleController@toggle')->name('toggle-sample');
-
+    // Sample management
+    Route::get('/post-manager', 'PostManagerController@index')->name('post-manager');
+    Route::post('/toggle-sample/{sample}', 'SampleController@toggle')->name('toggle-sample');
 });
