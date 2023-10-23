@@ -77,15 +77,15 @@ class SampleController extends Controller
 
     public function update(Request $request, Sample $sample)
     {
-        // Find the sample you're updating
-        $sample = Sample::find($sample);
-
         $request->validate([
             'name' => 'required',
             'audio_file' => ['required'],
             'description' => 'required',
             'cover' => ['image', 'mimes:jpg,jpeg,png'],
         ]);
+
+        // Find the sample you're updating
+        $sample = Sample::find($sample->id);
 
         if ($request->hasFile('cover')) {
             // Delete old image
