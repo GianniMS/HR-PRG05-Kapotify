@@ -38,12 +38,14 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('about') }}">About</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('post-manager') }}">Post manager</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('user-list') }}">User list</a>
-                    </li>
+                    @if (auth()->check() && auth()->user()->role == 2)
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('post-manager') }}">Post manager</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('user-list') }}">User list</a>
+                        </li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

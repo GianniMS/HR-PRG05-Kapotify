@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sample;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 
 class SampleController extends Controller
 {
@@ -81,7 +81,7 @@ class SampleController extends Controller
             'name' => 'required',
             'audio_file' => ['required'],
             'description' => 'required',
-            'cover' => ['required', 'image', 'mimes:jpg,jpeg,png'],
+            'cover' => ['image', 'mimes:jpg,jpeg,png'],
         ]);
 
         if ($request->hasFile('cover')) {
@@ -110,4 +110,5 @@ class SampleController extends Controller
         $sample->delete();
         return redirect('samples')->withSuccess('Delete successful!');
     }
+
 }

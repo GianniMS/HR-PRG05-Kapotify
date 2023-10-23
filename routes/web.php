@@ -13,7 +13,7 @@ use App\Http\Controllers\SampleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function(){
+Route::get('/', function () {
     return view('home');
 });
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
@@ -26,8 +26,9 @@ Auth::routes();
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 
-//Admin Routes
-Route::get('/post-manager', [App\Http\Controllers\PostManagerController::class, 'index'])->name('post-manager');
+Route::middleware(['role:2'])->group(function () {
+    Route::get('/user-list', [App\Http\Controllers\UserListController::class, 'index'])->name('user-list');
+    Route::post('/change-role/{user}', 'App\Http\Controllers\UserListController@changeRole')->name('change-role');
 
-Route::get('/user-list', [App\Http\Controllers\UserListController::class, 'index'])->name('user-list');
-
+    Route::get('/post-manager', [App\Http\Controllers\PostManagerController::class, 'index'])->name('post-manager');
+});
