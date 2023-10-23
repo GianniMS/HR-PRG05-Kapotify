@@ -19,7 +19,12 @@
                 <tr>
                     <td>{{ $sample->name }}</td>
                     <td>
-
+                        <form action="{{ route('toggle-sample', $sample->id) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-{{ $sample->active ? 'success' : 'danger' }}">
+                                {{ $sample->active ? 'Active' : 'Inactive' }}
+                            </button>
+                        </form>
                     </td>
                     <td>
                         <a href="{{ route('samples.edit', $sample->id) }}" class="btn btn-primary">Edit</a>

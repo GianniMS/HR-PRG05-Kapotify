@@ -16,7 +16,7 @@ class SampleController extends Controller
 
     public function index()
     {
-        $data = Sample::all();
+        $data = Sample::where('active', true)->get(); // Fetch only active samples
         return view('samples/samples', ['data' => $data]);
     }
 
@@ -109,6 +109,15 @@ class SampleController extends Controller
     {
         $sample->delete();
         return redirect('samples')->withSuccess('Delete successful!');
+    }
+
+    public function toggle(Sample $sample)
+    {
+        // Logic to toggle the sample's status
+        $sample->active = !$sample->active;
+        $sample->save();
+
+        return redirect()->back()->with('success', 'Sample status toggled successfully.');
     }
 
 }

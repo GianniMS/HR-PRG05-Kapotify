@@ -31,4 +31,6 @@ Route::middleware(['role:2'])->group(function () {
     Route::post('/change-role/{user}', 'App\Http\Controllers\UserListController@changeRole')->name('change-role');
 
     Route::get('/post-manager', [App\Http\Controllers\PostManagerController::class, 'index'])->name('post-manager');
+    Route::post('/toggle-sample/{sample}', 'App\Http\Controllers\SampleController@toggle')->name('toggle-sample');
+
 });
