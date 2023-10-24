@@ -5,6 +5,28 @@
 @section('content')
     <div class="container">
         <h1>Projects</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <form action="{{ route('projects.search') }}" method="GET">
+                    <div class="input-group mb-3">
+                        <input type="text" name="query" class="form-control" placeholder="Search projects by name or description" value="{{ request('query') }}">
+                        <select name="type" class="form-select">
+                            <option value="" selected>Filter by Type</option>
+                            <option value="album" {{ request('type') === 'album' ? 'selected' : '' }}>Album</option>
+                            <option value="single" {{ request('type') === 'single' ? 'selected' : '' }}>Single</option>
+                        </select>
+                        <button class="btn btn-primary" type="submit">Search & Filter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3">
+                @if(request('query') || request('type'))
+                    <a href="{{ route('projects.index') }}" class="btn btn-primary">Show All Samples</a>
+                @else
+                    <a href="" class="btn btn-outline-dark">All samples visible</a>
+                @endif
+            </div>
+        </div>
         @if(Auth::check() && Auth::user()->login_count >= 3)
             {{-- User is logged in and has at least 3 logins --}}
             <a href="{{ route('projects.create') }}" class="btn btn-info float-end">Upload Project</a>

@@ -25,9 +25,9 @@ Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('abou
 // Profile route
 Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile');
 
-// Project routes
+// Project routes , search is on top to prevent conflicting routes
+Route::get('/projects/search', 'App\Http\Controllers\ProjectController@search')->name('projects.search');
 Route::resource('projects', 'App\Http\Controllers\ProjectController');
-
 
 // Admin routes (if applicable)
 Route::middleware(['role:2'])->group(function () {

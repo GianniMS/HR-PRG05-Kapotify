@@ -120,4 +120,26 @@ class ProjectController extends Controller
         return redirect()->back()->with('success', 'Project status toggled successfully.');
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $type = $request->input('type');
+
+        $data = Project::query();
+
+        if ($query) {
+            $data->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('name', 'like', "%$query%")
+                    ->orWhere('description', 'like', "%$query%");
+            });
+        }
+
+        if ($type) {
+            $data->where('type', $type);
+        }
+
+        $data = $data->get();
+
+        return view('projects/projects', ['data' => $data]);
+    }
 }
