@@ -42,6 +42,7 @@ class ProjectController extends Controller
         $project->user_id = Auth::id();
         $project->name = $request->input('name');
         $project->description = $request->input('description');
+        $project->type = $request->input('type');
 
         if ($request->hasFile('cover')) {
             $destination_path = 'public/projects/covers';

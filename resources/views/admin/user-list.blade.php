@@ -11,20 +11,23 @@
                 {{ session('success') }}
             </div>
         @endif
+        {{--Display list of all the users, their login count and their role--}}
         <table class="table">
             <tr>
                 <th>ID</th>
                 <th>Username</th>
                 <th>Login count</th>
                 <th>Role</th>
+                <th>Action</th>
             </tr>
             @foreach ($users as $user)
                 <tbody>
                 <tr>
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
-                    <td>{{ $user->login_count }}</td> <!-- Display the login count -->
+                    <td>{{ $user->login_count }}</td>
                     <td>
+                        {{--Dynamic role display--}}
                         @if ($user->role === 1)
                             User
                         @elseif ($user->role === 2)
@@ -33,8 +36,9 @@
                     </td>
                     <td>
                         <form method="POST" action="{{ route('change-role', $user) }}">
+                            {{--Admin to user / user to admin button--}}
                             @csrf
-                            <button type="submit">
+                            <button class="btn btn-primary" type="submit">
                                 @if ($user->role === 1)
                                     Make Admin
                                 @elseif ($user->role === 2)

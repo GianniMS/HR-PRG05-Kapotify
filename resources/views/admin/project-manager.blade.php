@@ -21,6 +21,7 @@
                     <td>
                         <form action="{{ route('toggle-project', $project->id) }}" method="post">
                             @csrf
+                            {{--Active to inactive / inactive to active toggle button--}}
                             <button type="submit" class="btn btn-{{ $project->active ? 'success' : 'danger' }}">
                                 {{ $project->active ? 'Active' : 'Inactive' }}
                             </button>
@@ -30,8 +31,9 @@
                         <form action="{{ route('projects.destroy', $project->id) }}" method="post"
                               style="display:inline"
                               onsubmit="confirm('Confirm delete')">
-                            {{--                                        Make the confirmation myself instead of client side--}}
+                            {{--Make the confirmation myself instead of client side--}}
                             @csrf
+                            {{--Delete other users post--}}
                             @method('DELETE')
                             <input type="submit" value="Delete" class="btn btn-danger">
                         </form>

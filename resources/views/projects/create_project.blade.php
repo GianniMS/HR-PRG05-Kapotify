@@ -11,6 +11,8 @@
                 <div class="col-md-6">
                     <form action="{{ route('projects.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        {{--Every element keeps the previous input information when there is an input validation error--}}
+                        {{--Every element has an invalid feedback message--}}
                         <div class="mb-3 mt-3">
                             <label for="name" class="form-label">Name:</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
@@ -60,7 +62,7 @@
             </div>
         </div>
     @else
-{{--        Incase someone deeplinks to this page--}}
+        {{--        Incase someone deeplinks to this page--}}
         <div class="container mt-3">
             <div class="alert alert-danger">
                 <b>Need to login atleast 3 times! You only logged in {{ $loginCount }} times</b>

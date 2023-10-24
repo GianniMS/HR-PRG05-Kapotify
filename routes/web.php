@@ -24,6 +24,8 @@ Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('abou
 
 // Profile route
 Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile');
+Route::put('/profile', 'App\Http\Controllers\ProfileController@update')->name('profile.update');
+
 
 // Project routes , search is on top to prevent conflicting routes
 Route::get('/projects/search', 'App\Http\Controllers\ProjectController@search')->name('projects.search');

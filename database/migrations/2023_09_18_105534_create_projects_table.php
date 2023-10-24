@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('name', 50);
             $table->text('description');
-            $table->enum('type', ['album', 'single'])->default('single');
+            $table->enum('type', ['album', 'single'])->nullable();
             $table->string('cover', 255);
             $table->boolean('active')->default(true);
 
