@@ -29,18 +29,16 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
+
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('samples.index') }}">Samples</a>
+                        <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('about') }}">About</a>
                     </li>
                     @if (auth()->check() && auth()->user()->role == 2)
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('post-manager') }}">Post manager</a>
+                            <a class="nav-link" href="{{ route('project-manager') }}">Project manager</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('user-list') }}">User list</a>

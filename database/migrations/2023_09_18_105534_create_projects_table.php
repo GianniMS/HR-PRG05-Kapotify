@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('samples', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id')->constrained();
             $table->string('name', 50);
-            $table->string('audio_file', 255);
             $table->text('description');
+            $table->enum('type', ['album', 'single'])->default('single');
             $table->string('cover', 255);
             $table->boolean('active')->default(true);
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('samples');
+        Schema::dropIfExists('projects');
     }
 };

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sample extends Model
+class Project extends Model
 {
     public $timestamps = false;
 
@@ -22,7 +22,7 @@ class Sample extends Model
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'genre_sample', 'sample_id', 'genre_id')
+        return $this->belongsToMany(Genre::class, 'genre_project', 'project_id', 'genre_id')
             ->withTimestamps(); // If you want to track timestamps
     }
 }

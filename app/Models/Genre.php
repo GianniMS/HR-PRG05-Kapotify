@@ -11,7 +11,7 @@ class Genre extends Model
 
     public function samples()
     {
-        return $this->belongsToMany(Sample::class, 'genre_sample', 'genre_id', 'sample_id')
+        return $this->belongsToMany(Project::class, 'genre_project', 'genre_id', 'project_id')
             ->withTimestamps(); // If you want to track timestamps
     }
 

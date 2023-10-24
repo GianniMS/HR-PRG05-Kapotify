@@ -2,7 +2,7 @@
 
 use App\Http\Middleware\CheckLoginCount;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SampleController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,23 +18,24 @@ use App\Http\Controllers\SampleController;
 Auth::routes();
 
 // Home and About routes
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/about', 'AboutUsController@index')->name('about');
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/about', 'App\Http\Controllers\AboutUsController@index')->name('about');
 
 // Profile route
-Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::get('/profile', 'App\Http\Controllers\ProfileController@index')->name('profile');
 
-// Sample routes
-Route::resource('samples', 'SampleController');
+// Project routes
+Route::resource('projects', 'App\Http\Controllers\ProjectController');
 
 
 // Admin routes (if applicable)
 Route::middleware(['role:2'])->group(function () {
     // User list and role change
-    Route::get('/user-list', 'UserListController@index')->name('user-list');
-    Route::post('/change-role/{user}', 'UserListController@changeRole')->name('change-role');
+    Route::get('/user-list', 'App\Http\Controllers\UserListController@index')->name('user-list');
+    Route::post('/change-role/{user}', 'App\Http\Controllers\UserListController@changeRole')->name('change-role');
 
     // Sample management
-    Route::get('/post-manager', 'PostManagerController@index')->name('post-manager');
-    Route::post('/toggle-sample/{sample}', 'SampleController@toggle')->name('toggle-sample');
+    Route::get('/project-manager', 'App\Http\Controllers\ProjectManagerController@index')->name('project-manager');
+    Route::post('/toggle-project/{project}', 'App\Http\Controllers\ProjectController@toggle')->name('toggle-project');
 });

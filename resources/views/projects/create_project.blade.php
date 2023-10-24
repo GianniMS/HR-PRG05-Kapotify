@@ -1,15 +1,15 @@
 @extends ('layouts.web')
 
-@section('title', 'Create Sample')
+@section('title', 'Create Project')
 
 @section ('content')
     @if(Auth::check() && Auth::user()->login_count >= 3)
         <div class="container mt-3">
-            <a href="{{ route('samples.index') }}" class="btn btn-danger float-end">Back</a>
-            <h3>Upload your sample:</h3>
+            <a href="{{ route('projects.index') }}" class="btn btn-danger float-end">Back</a>
+            <h3>Upload your project:</h3>
             <div class="col-md-12">
                 <div class="col-md-6">
-                    <form action="{{ route('samples.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('projects.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3 mt-3">
                             <label for="name" class="form-label">Name:</label>
@@ -22,22 +22,23 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="audio_file" class="form-label">Audio_file:</label>
-                            {{--            input type will be changed when audio file implementation--}}
-                            <input type="text" class="form-control @error('audio_file') is-invalid @enderror"
-                                   id="audio_file" name="audio_file" value="{{ old('audio_file') }}">
-                            @error('audio_file')
+                            <label for="description" class="form-label">Description:</label>
+                            <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                   id="description" placeholder="Enter description"
+                                   name="description" value="{{ old('description') }}">
+                            @error('description')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description:</label>
-                            <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                   id="description" placeholder="Enter description"
-                                   name="description" value="{{ old('description') }}">
-                            @error('description')
+                            <label for="type" class="form-label">Type:</label>
+                            <select class="form-select @error('type') is-invalid @enderror" id="type" name="type">
+                                <option value="single" {{ old('type') === 'single' ? 'selected' : '' }}>Single</option>
+                                <option value="album" {{ old('type') === 'album' ? 'selected' : '' }}>Album</option>
+                            </select>
+                            @error('type')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -64,7 +65,7 @@
             <div class="alert alert-danger">
                 <b>Need to login atleast 3 times! You only logged in {{ $loginCount }} times</b>
             </div>
-            <a href="{{ route('samples.index') }}" class="btn btn-danger float-end">Back</a>
+            <a href="{{ route('projects.index') }}" class="btn btn-danger float-end">Back</a>
         </div>
     @endif
 @endsection
