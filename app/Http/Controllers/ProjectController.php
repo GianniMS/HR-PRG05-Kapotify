@@ -109,8 +109,17 @@ class ProjectController extends Controller
         return redirect('projects')->withSuccess('Update successful!');
     }
 
-    public function destroy(Project $project)
+    public function confirmDelete($id) {
+        return view('projects/confirm_delete', ['projectId' => $id]);
+    }
+
+    public function destroy($id)
     {
+        $project = Project::find($id);
+        if (!$project) {
+            return redirect('projects')->withError('Project not found or already deleted.');
+        }
+
         $project->delete();
         return redirect('projects')->withSuccess('Delete successful!');
     }

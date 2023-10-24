@@ -74,12 +74,9 @@
                                         @if(Auth::check() && $dt->user_id === Auth::user()->id)
                                             <a href="{{ route('projects.edit', $dt->id) }}"
                                                class="btn btn-success">Edit</a>
-                                            <form action="{{ route('projects.destroy', $dt->id) }}" method="post"
-                                                  style="display:inline" onsubmit="return confirm('Confirm delete')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <input type="submit" value="Delete" class="btn btn-danger">
-                                            </form>
+                                            {{--Link to confirm delete--}}
+                                            <a href="{{ route('projects.confirmDelete', $dt->id) }}"
+                                               class="btn btn-danger">Delete</a>
                                         @endif
                                     </div>
                                 </div>

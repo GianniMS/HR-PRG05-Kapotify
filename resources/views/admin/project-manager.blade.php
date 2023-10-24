@@ -33,9 +33,9 @@
                               onsubmit="confirm('Confirm delete')">
                             {{--Make the confirmation myself instead of client side--}}
                             @csrf
-                            {{--Delete other users post--}}
+                            {{--Link to delete confirmation--}}
                             @method('DELETE')
-                            <input type="submit" value="Delete" class="btn btn-danger">
+                            <a href="{{ route('projects.confirmDelete', $project->id) }}" class="btn btn-danger">Delete</a>
                         </form>
                     </td>
                 </tr>

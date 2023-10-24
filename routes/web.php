@@ -20,6 +20,7 @@ Route::put('/profile', 'App\Http\Controllers\ProfileController@update')->name('p
 //Project routes , search is on top to prevent conflicting routes
 Route::get('/projects/search', 'App\Http\Controllers\ProjectController@search')->name('projects.search');
 Route::resource('projects', 'App\Http\Controllers\ProjectController');
+Route::get('projects/confirm-delete/{id}', 'App\Http\Controllers\ProjectController@confirmDelete')->name('projects.confirmDelete');
 
 //Admin routes, checks if role = 2 (admin)
 Route::middleware(['role:2'])->group(function () {
