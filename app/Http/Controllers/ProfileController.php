@@ -9,19 +9,21 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-//        Make it so only your own profile can be accessed
+        //Make it so only your own profile can be accessed
         $this->middleware('auth');
     }
 
     public function index()
     {
-        $user = Auth::user(); // Get the currently authenticated user
+        //Get the currently authenticated user
+        $user = Auth::user();
         return view('profile/profile', compact('user'));
     }
 
     public function update(Request $request)
     {
-        $user = Auth::user(); // Get the currently authenticated user
+        //Get the currently authenticated user
+        $user = Auth::user();
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -32,6 +34,7 @@ class ProfileController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
 
+        //Checks for new password request and update it safely
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
         }

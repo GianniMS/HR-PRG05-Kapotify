@@ -17,14 +17,16 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $data = Project::where('active', true)->get(); // Fetch only active samples
+        //Only fetch active projects
+        $data = Project::where('active', true)->get();
         return view('projects/projects', ['data' => $data]);
     }
 
     public function create()
     {
-        $user = Auth::user(); // Get the currently authenticated user
-        $loginCount = $user->login_count; // Assuming 'login_count' is the name of the field
+        //Get the currently authenticated user
+        $user = Auth::user();
+        $loginCount = $user->login_count;
 
         return view('projects/create_project', compact('loginCount'));
     }
@@ -45,6 +47,7 @@ class ProjectController extends Controller
         $project->type = $request->input('type');
 
         if ($request->hasFile('cover')) {
+            //Upload cover to storage and store the path to DB
             $destination_path = 'public/projects/covers';
             $cover = $request->file('cover');
             $cover_name = $cover->getClientOriginalName();
@@ -88,7 +91,7 @@ class ProjectController extends Controller
         if ($request->hasFile('cover')) {
             // Delete old image
 
-            // Upload new image to storage
+            //Upload new image to storage, makes the cover editable
             $destination_path = 'public/projects/covers';
             $cover = $request->file('cover');
             $cover_name = $cover->getClientOriginalName();
@@ -114,7 +117,7 @@ class ProjectController extends Controller
 
     public function toggle(Project $project)
     {
-        // Logic to toggle the sample's status
+        //Toggle the project status
         $project->active = !$project->active;
         $project->save();
 
@@ -123,11 +126,12 @@ class ProjectController extends Controller
 
     public function search(Request $request)
     {
+        //Construct DB query based on input.
         $query = $request->input('query');
         $type = $request->input('type');
 
         $data = Project::query();
-
+        //Allows for simultanious use search and filter
         if ($query) {
             $data->where(function ($queryBuilder) use ($query) {
                 $queryBuilder->where('name', 'like', "%$query%")

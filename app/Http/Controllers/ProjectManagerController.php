@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class ProjectManagerController extends Controller
 {
     public function index(){
-        // Retrieve samples from your database
-        $projects = Project::all(); // Replace 'Sample' with your actual model name
+        //Retrieve projects from DB
+        $projects = Project::all();
 
         return view('admin/project-manager', compact('projects'));
     }

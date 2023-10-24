@@ -15,10 +15,11 @@ class UserListController extends Controller
 
     public function changeRole(User $user)
     {
+        //Change to user / admin
         if ($user->role === 1) {
-            $user->role = 2; // Change to User
+            $user->role = 2;
         } elseif ($user->role === 2) {
-            $user->role = 1; // Change to Admin
+            $user->role = 1;
         }
 
         $user->save();
