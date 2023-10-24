@@ -36,9 +36,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('about') }}">About</a>
-                    </li>
                     @if (auth()->check() && auth()->user()->role == 2)
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('project-manager') }}">Project manager</a>
@@ -47,6 +44,9 @@
                             <a class="nav-link" href="{{ route('user-list') }}">User list</a>
                         </li>
                     @endif
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('about') }}">About</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

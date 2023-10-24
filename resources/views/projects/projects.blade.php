@@ -66,6 +66,12 @@
                                 <h3 class="card-title">
                                     <span>{{ $dt->name }}</span>
                                 </h3>
+                                <p>
+                                    <span>{{ $dt->description }}</span>
+                                </p>
+                                <p>
+                                    <span><Strong>Type: </Strong> {{ $dt->type }}</span>
+                                </p>
                                 <div class="row">
                                     <div class="col">
                                         {{--The action buttons--}}
@@ -84,6 +90,28 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="pagination">
+                {{--Added pagination per 6 projects--}}
+                @if ($data->onFirstPage())
+                    <span class="disabled">
+            <a href="#" class="btn btn-secondary btn-lg">&laquo;</a>
+        </span>
+                @else
+                    <a href="{{ $data->previousPageUrl() }}" rel="prev" class="btn btn-primary btn-lg">&laquo;</a>
+                @endif
+
+                @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
+                    <a href="{{ $url }}" class="btn btn-primary btn-lg">{{ $page }}</a>
+                @endforeach
+
+                @if ($data->hasMorePages())
+                    <a href="{{ $data->nextPageUrl() }}" rel="next" class="btn btn-primary btn-lg">&raquo;</a>
+                @else
+                    <span class="disabled">
+            <a href="#" class="btn btn-secondary btn-lg">&raquo;</a>
+        </span>
+                @endif
             </div>
         </div>
     </div>

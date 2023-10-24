@@ -17,8 +17,8 @@ class ProjectController extends Controller
 
     public function index()
     {
-        //Only fetch active projects
-        $data = Project::where('active', true)->get();
+        //Only fetch active projects per 6 for pagination
+        $data = Project::where('active', true)->paginate(6);
         return view('projects/projects', ['data' => $data]);
     }
 
@@ -140,7 +140,8 @@ class ProjectController extends Controller
         $type = $request->input('type');
 
         $data = Project::query();
-        //Allows for simultanious use search and filter
+
+        //Allows for simultaneous use of search and filter
         if ($query) {
             $data->where(function ($queryBuilder) use ($query) {
                 $queryBuilder->where('name', 'like', "%$query%")
@@ -152,8 +153,10 @@ class ProjectController extends Controller
             $data->where('type', $type);
         }
 
-        $data = $data->get();
+        //Add pagination here
+        $data = $data->paginate(6);
 
         return view('projects/projects', ['data' => $data]);
     }
+
 }
