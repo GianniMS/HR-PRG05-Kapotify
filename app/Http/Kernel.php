@@ -40,12 +40,13 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
 
     protected $routeMiddleware = [
+        //Middleware for user role and login count
         'role' => \App\Http\Middleware\AdminMiddleware::class,
         'check_login_count' => \App\Http\Middleware\CheckLoginCount::class,
     ];

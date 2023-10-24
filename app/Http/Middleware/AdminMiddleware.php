@@ -17,17 +17,18 @@ class AdminMiddleware
     {
         $user = auth()->user();
         $roleName = $this->getRoleName($role);
-
+        //Checks the users role
         if ($user && $user->role === (int)$role) {
             return $next($request);
         } else {
+        //Dynamic error message
             abort(403, "Unauthorized action; Current Role: {$this->getRoleName($user->role)} Required Role: $roleName");
-
         }
     }
 
     protected function getRoleName($role)
     {
+        //Proper name display error message
         return $role === '1' ? 'User' : ($role === '2' ? 'Admin' : 'User');
     }
 }

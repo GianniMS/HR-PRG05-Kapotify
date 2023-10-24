@@ -12,17 +12,10 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-      'user_id',
-      'name',
-      'audio_file',
-      'description',
-      'cover',
+        'user_id',
+        'name',
+        'description',
+        'type',
+        'cover',
     ];
-
-
-    public function genres()
-    {
-        return $this->belongsToMany(Genre::class, 'genre_project', 'project_id', 'genre_id')
-            ->withTimestamps(); // If you want to track timestamps
-    }
 }
