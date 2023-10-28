@@ -68,7 +68,7 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        // Check if the logged-in user is the owner of the project
+        //Check if the logged-in user is the owner of the project
         if (Auth::user()->id !== $project->user_id) {
             abort(403, 'Unauthorized'); // Return a 403 Forbidden response if not authorized
         }
@@ -85,11 +85,22 @@ class ProjectController extends Controller
             'cover' => ['image', 'mimes:jpg,jpeg,png'],
         ]);
 
-        // Find the sample you're updating
+        //Find the sample you're updating
         $project = Project::find($project->id);
 
         if ($request->hasFile('cover')) {
-            // Delete old image
+            //Get the old cover from the database
+            $oldCoverFilename = $project->cover;
+
+            //Delete old image
+            if ($oldCoverFilename) {
+                $oldImagePath = storage_path('app/public/projects/covers/' . $oldCoverFilename);
+
+                //Check if the old image exists before deleting
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
 
             //Upload new image to storage, makes the cover editable
             $destination_path = 'public/projects/covers';
